@@ -30,7 +30,6 @@ safe: false
 #timezone:    America/Chicago
 future:      true
 
-
 ## code highlight options
 syntax_highlighter: rouge
 input: GFM
@@ -64,7 +63,7 @@ owner:
   # Social networking links used in footer. Update and remove as you like.
   # twitter:        abcd
   # facebook:       
-  github:         https://github.com/rlee12
+  github:         rlee12
   stackexchange:  
   linkedin:       https://www.linkedin.com/in/ray-li-4b0a9293/
   instagram:      
