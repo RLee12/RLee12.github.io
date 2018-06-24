@@ -402,7 +402,7 @@ plt.tight_layout()
 {% endhighlight %}
 
 
-![png]({{ "output_13_0.png" | site.urlimg }})
+![png]({{ "/images/output_13_0.png" | absolute_url }})
 
 
 
@@ -416,7 +416,7 @@ plt.tight_layout()
 {% endhighlight %}
 
 
-![png]({{ "output_14_0.png" | site.urlimg }})
+![png]({{ "/images/output_14_0.png" | absolute_url }})
 
 
 
