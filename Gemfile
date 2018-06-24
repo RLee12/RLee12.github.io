@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'nokogiri', '= 1.6.8.1'
+gem 'nokogiri'
 gem 'addressable', '= 2.3.8'
 
 group :jekyll_plugins do
