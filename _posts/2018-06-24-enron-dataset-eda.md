@@ -58,6 +58,12 @@ data_frame.head(5)
 
 <div>
 <style scoped>
+    .dataframe {
+        overflow: auto;
+        background-color: #333;
+        white-space: nowrap;
+    }
+
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -65,7 +71,7 @@ data_frame.head(5)
     .dataframe tbody tr th {
         vertical-align: top;
     }
-
+    
     .dataframe thead th {
         text-align: left;
     }
