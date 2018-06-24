@@ -12,7 +12,6 @@ category:
 tags:
   - eda
   - data analysis
-  - machine learning
   - data science
 show_meta: true
 mathjax: true
