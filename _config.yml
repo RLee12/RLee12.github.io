@@ -49,8 +49,8 @@ exclude: ["lib", "config.rb", "Gemfile", "Capfile", "Gemfile.lock", "config", "l
 
 # About/contact
 author:
-  name:              Foo Boo
-  url:               https://twitter.com/abcd
+  name:              Ray Li
+  url:               https://rlee12.github.io
   avatar:         foo.png
   email:          m519160201@gmail.com 
 
@@ -64,7 +64,7 @@ owner:
   # Social networking links used in footer. Update and remove as you like.
   # twitter:        abcd
   # facebook:       
-  github:         rlee12
+  github:         https://github.com/rlee12
   stackexchange:  
   linkedin:       https://www.linkedin.com/in/ray-li-4b0a9293/
   instagram:      
