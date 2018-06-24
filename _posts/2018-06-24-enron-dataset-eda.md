@@ -58,11 +58,6 @@ data_frame.head(5)
 
 <div>
 <style scoped>
-    .dataframe {
-        overflow-x: auto;
-        max-width: calc(100% - 14ex);
-    }
-
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
