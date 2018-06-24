@@ -18,6 +18,7 @@ show_meta: true
 mathjax: true
 gistembed: true
 published: true
+urlimg: true
 ---
 
 {% highlight python %}
@@ -31,7 +32,7 @@ pd.set_option("max_columns", 999)
 {% endhighlight %}
 
 
-```python
+{% highlight python %}
 # Load the dictionary containing the dataset, and convert the dictionary to dataframe.
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file) 
@@ -45,12 +46,12 @@ data_frame[cols] = data_frame[cols].apply(pd.to_numeric, errors="coerce")
 data_frame.drop(["email_address"], axis=1, inplace=True)
 data_frame["name"] = data_frame.index
 data_frame.index = xrange(len(data_frame))
-```
+{% endhighlight %}
 
 
-```python
+{% highlight python %}
 data_frame.head(5)
-```
+{% endhighlight %}
 
 
 
@@ -224,12 +225,12 @@ data_frame.head(5)
 
 
 
-```python
+{% highlight python %}
 # Inspect number of data points in each class.
 print data_frame.groupby(["poi"]).size()
 print 
 print "Portion of poi in the dataset:", round(float(data_frame.groupby(["poi"]).size()[1])/len(data_frame),3)*100
-```
+{% endhighlight %}
 
     poi
     False    128
@@ -244,10 +245,10 @@ Since the majority of class is not poi, we will need to take care of this imbala
 </font>
 
 
-```python
+{% highlight python %}
 # Inspect number of NA's after applying type conversion.
 data_frame.isna().apply(sum)
-```
+{% endhighlight %}
 
 
 
@@ -284,12 +285,12 @@ All columns, except poi, email_address, and name, have missing values. The numbe
 </font>
 
 
-```python
+{% highlight python %}
 # Fill missing values with 0.
 data_frame = data_frame.fillna(value=0)
 
 data_frame.isna().apply(sum)
-```
+{% endhighlight %}
 
 
 
@@ -324,7 +325,7 @@ After filling missing values, we should check if columns of finance data add up 
 </font>
 
 
-```python
+{% highlight python %}
 income_df = (data_frame[["salary","deferral_payments","bonus", "expenses", "loan_advances", "other", "director_fees", 
                          "deferred_income", "long_term_incentive"]].sum(axis=1))
 income_diff = data_frame["total_payments"] - income_df
@@ -335,7 +336,7 @@ print
 stock_df = (data_frame[["exercised_stock_options", "restricted_stock", "restricted_stock_deferred"]].sum(axis=1))
 stock_diff = data_frame["total_stock_value"] - stock_df
 print stock_diff[stock_diff>0]
-```
+{% endhighlight %}
 
     8       201715.0
     11    15180562.0
@@ -349,7 +350,7 @@ Looks like 9th and 12th person have non-zero results. We need to correct the dat
 </font>
 
 
-```python
+{% highlight python %}
 # Correct the data for 9th and 12th person.
 data_frame.at[8, "exercised_stock_options"] = 0
 data_frame.at[8, "total_stock_value"] = 0
@@ -370,10 +371,10 @@ data_frame.at[11, "director_fees"] = 0
 data_frame.at[11, "deferred_income"] = 0
 data_frame.at[11, "deferral_payments"] = 0
 data_frame.at[11, "expenses"] = 137864
-```
+{% endhighlight %}
 
 
-```python
+{% highlight python %}
 # Check those two persons again to see if the data have been corrected.
 income_df = (data_frame[["salary","deferral_payments","bonus", "expenses", "loan_advances", "other", "director_fees", 
                          "deferred_income", "long_term_incentive"]].sum(axis=1))
@@ -385,7 +386,7 @@ print
 stock_df = (data_frame[["exercised_stock_options", "restricted_stock", "restricted_stock_deferred"]].sum(axis=1))
 stock_diff = data_frame["total_stock_value"] - stock_df
 print stock_diff[stock_diff>0]
-```
+{% endhighlight %}
 
     Series([], dtype: float64)
     
@@ -393,7 +394,7 @@ print stock_diff[stock_diff>0]
 
 
 
-```python
+{% highlight python %}
 # First visualize the distribution of each column that is about a person's emails.
 plot_email_data = (data_frame[["to_messages","shared_receipt_with_poi","from_messages","from_this_person_to_poi",
                                "from_poi_to_this_person"]])
@@ -406,28 +407,28 @@ for plot_idx in xrange(5):
     ax.set_xlabel(plot_email_data.columns[plot_idx]); ax.set_ylabel("")
     
 plt.tight_layout()
-```
+{% endhighlight %}
 
 
 ![png]({{ "output_13_0.png" | urlimg }})
 
 
 
-```python
+{% highlight python %}
 fig = plt.figure(figsize=(12,8), dpi=90)
 for plot_idx in xrange(5):
     ax = plt.subplot(3, 2, plot_idx+1)
     sns.distplot(plot_email_data[plot_email_data.columns[plot_idx]], ax=ax, kde=False, color="#4341f4")
     
 plt.tight_layout()
-```
+{% endhighlight %}
 
 
 ![png]({{ "output_14_0.png" | urlimg }})
 
 
 
-```python
+{% highlight python %}
 # Then visualize the distribution of each column that is about a person's finance .
 plot_finance_data = (data_frame[["salary","deferral_payments","total_payments","exercised_stock_options","bonus",
                               "restricted_stock", "restricted_stock_deferred", "total_stock_value", "expenses", 
@@ -448,14 +449,14 @@ for plot_idx in xrange(len(plot_finance_data)):
         continue
     
 plt.tight_layout()
-```
+{% endhighlight %}
 
 
 ![png]({{ "output_15_0.png" | urlimg }})
 
 
 
-```python
+{% highlight python %}
 fig = plt.figure(figsize=(12,22), dpi=90)
 for plot_idx in xrange(len(plot_finance_data)):
     try:
@@ -467,7 +468,7 @@ for plot_idx in xrange(len(plot_finance_data)):
         continue
     
 plt.tight_layout()
-```
+{% endhighlight %}
 
 
 ![png]({{ "output_16_0.png" | urlimg }})
@@ -482,10 +483,10 @@ Some takeaways from above plots:
 </font>
 
 
-```python
+{% highlight python %}
 # Tackle the outliers.
 data_frame[["name", "total_payments"]].sort_values(by=["total_payments"], ascending=False).head(5)
-```
+{% endhighlight %}
 
 
 
@@ -549,12 +550,12 @@ Clearly, TOTAL should be dropped, since this row is just the summary from the do
 </font>
 
 
-```python
+{% highlight python %}
 data_frame = data_frame.drop([130,79]).reset_index(drop=True)
-```
+{% endhighlight %}
 
 
-```python
+{% highlight python %}
 # Visualize correlation among all features.
 corr_matrix = data_frame.drop(["name"], axis=1).corr()
 mask = np.zeros_like(corr_matrix, dtype=np.bool) # Create a mask to wipe out upper right triangle.
@@ -566,7 +567,7 @@ cmap = sns.diverging_palette(220, 10, as_cmap=True) # Create color map.
 ax = sns.heatmap(corr_matrix, mask=mask, cmap=cmap, vmax=.5, center=0, square=True, linewidths=.5, vmin=-1, 
                  cbar_kws={"shrink": .5})
 f.add_axes(ax)
-```
+{% endhighlight %}
 
 
 
@@ -590,12 +591,12 @@ Next, let's use intuition to plot some scatter plots and examine whether some fe
 </font>
 
 
-```python
+{% highlight python %}
 sns.set(); sns.set_context("notebook")
 plt.rcParams['figure.dpi'] = 90
 sns.pairplot(data_frame, hue="poi", vars=["salary", "bonus", "exercised_stock_options", "long_term_incentive"], 
              palette="husl")
-```
+{% endhighlight %}
 
 
 
