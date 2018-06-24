@@ -55,7 +55,7 @@ data_frame.head(5)
 
 
 
-
+<!-- Add the css script to truncate long table and make it scroll. -->
 <div style="overflow-x: scroll;" markdown="block">
 
 <style scoped>
