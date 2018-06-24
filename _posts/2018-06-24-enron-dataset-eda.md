@@ -492,12 +492,12 @@ data_frame[["name", "total_payments"]].sort_values(by=["total_payments"], ascend
     }
 
     .dataframe thead th {
-        text-align: center;
+        text-align: left;
     }
 </style>
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: center;">
+    <tr style="text-align: left;">
       <th></th>
       <th>name</th>
       <th>total_payments</th>
