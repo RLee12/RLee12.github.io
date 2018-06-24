@@ -50,13 +50,13 @@ exclude: ["lib", "config.rb", "Gemfile", "Capfile", "Gemfile.lock", "config", "l
 author:
   name:              Ray Li
   url:               https://rlee12.github.io
-  avatar:         foo.png
+  avatar:         little-squirrel.jpg
   email:          m519160201@gmail.com 
 
 # Owner/author information
 owner:
   name:           Ray Li
-  avatar:         foo.png
+  avatar:         little-squirrel.jpg
   #email:          
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
   description:
