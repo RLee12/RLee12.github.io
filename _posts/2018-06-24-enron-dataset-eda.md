@@ -18,6 +18,8 @@ show_meta: true
 mathjax: true
 gistembed: true
 published: true
+hide_printmsg: true
+show_meta: false
 ---
 
 {% highlight python %}
