@@ -10,9 +10,9 @@ encoding: utf-8
 title:               Quant Hub
 tagline:             Quant Hub
 description:         These violent delights have violent ends.
-url: https://rlee12.github.io/rlee
-baseurl: "/rlee"
-urlimg: https://rlee12.github.io/rlee/images/
+url: https://rlee12.github.io
+baseurl: ""
+urlimg: https://rlee12.github.io/images/
 ## If you do not have custom domain, comment top three lines, uncomment three lines below and replace dyndna with your github userid and lanyon-plus with your project name. Also, rename CNAME file to CNAME.sample
 #url: https://dyndna.github.io/lanyon-plus
 #baseurl: "/lanyon-plus"
