@@ -56,7 +56,8 @@ data_frame.head(5)
 
 
 
-<div>
+<div style="overflow-x: scroll;" markdown="block">
+
 <style scoped>
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
@@ -72,7 +73,7 @@ data_frame.head(5)
 </style>
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: left; overflow-x: scroll;" markdown="block">
+    <tr style="text-align: left;">
       <th></th>
       <th>salary</th>
       <th>to_messages</th>
@@ -220,6 +221,7 @@ data_frame.head(5)
     </tr>
   </tbody>
 </table>
+
 </div>
 
 
