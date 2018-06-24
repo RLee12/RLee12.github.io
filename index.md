@@ -14,7 +14,21 @@ description: "Think like a Quant"
       </a>
     </h1>
 
-  {% if post.modified.size > 2 %}<span class="post-date indexpg" itemprop="dateModified" content="{{ post.modified | date: "%Y-%m-%d" }}"><i class="fa fa-edit" title="Last updated"> {{ post.modified | date_to_string }}</i> <a href="{{ site.url }}/featured" title="Featured posts"><i class="fa fa-paperclip" title="Featured" class="social-icons"></i></a></span>{% else %}<span class="post-date indexpg" itemprop="datePublished" content="{{ post.date | date: "%Y-%m-%d" }}"><i class="fa fa-calendar" title="Date published"> {{ post.date | date_to_string }}</i> <a href="{{ site.url }}/featured" title="Featured posts"><i class="fa fa-paperclip" title="Featured" class="social-icons"></i></a></span>{% endif %}
+  {% if post.modified.size > 2 %}
+    <span class="post-date indexpg" itemprop="dateModified" content="{{ post.modified | date: "%Y-%m-%d" }}">
+      <i class="fa fa-edit" title="Last updated"> {{ post.modified | date_to_string }}</i> 
+      <a href="{{ site.url }}/featured" title="Featured posts">
+        <i class="fa fa-paperclip" title="Featured" class="social-icons"></i>
+      </a>
+    </span>
+    {% else %}
+    <span class="post-date indexpg" itemprop="datePublished" content="{{ post.date | date: "%Y-%m-%d" }}">
+    <i class="fa fa-calendar" title="Date published"> {{ post.date | date_to_string }}</i> 
+    <a href="{{ site.url }}/featured" title="Featured posts">
+      <i class="fa fa-paperclip" title="Featured" class="social-icons"></i>
+    </a>
+    </span>
+  {% endif %}
 
  {% if post.description.size > 140 %}{{ post.description | markdownify | remove: '<p>' | remove: '</p>' }}{% else %}{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}{% endif %} <a href="{{ site.url }}{{ post.url }}" title="Read more"><strong>Read more...</strong></a>
   </div>
