@@ -444,7 +444,7 @@ plt.tight_layout()
 {% endhighlight %}
 
 
-![png]({{ "output_15_0.png" | site.urlimg }})
+![png]({{ "/images/output_15_0.png" | absolute_url }})
 
 
 
@@ -463,7 +463,7 @@ plt.tight_layout()
 {% endhighlight %}
 
 
-![png]({{ "output_16_0.png" | site.urlimg }})
+![png]({{ "/images/output_16_0.png" | absolute_url }})
 
 
 Some takeaways from above plots:
@@ -565,7 +565,7 @@ f.add_axes(ax)
 
 
 
-![png]({{ "output_21_1.png" | site.urlimg }})
+![png]({{ "/images/output_21_1.png" | absolute_url }})
 
 
 The correlation heatmap coincides with the data structure that email data almost always correlate with email data, and finance data almost always correlate with finance data.
@@ -590,7 +590,7 @@ sns.pairplot(data_frame, hue="poi", vars=["salary", "bonus", "exercised_stock_op
 
 
 
-![png]({{ "output_24_1.png" | site.urlimg }})
+![png]({{ "/images/output_24_1.png" | absolute_url }})
 
 
 Quitely interesting, exercised_stock_options and long_term_incentive seem like good indicators of poi. Of course we will examine importance of each feature in the modeling section.
