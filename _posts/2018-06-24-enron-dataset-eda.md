@@ -7,11 +7,9 @@ description: "The Enron scandal provides a great reservoir for data analysis. Th
 category: 
   - data science
   - featured
-  - exploratory data analysis
 # tags will also be used as html meta keywords.
 tags:
-  - eda
-  - data analysis
+  - exploratory data analysis
   - data science
 show_meta: true
 mathjax: true
