@@ -231,13 +231,14 @@ print
 print "Portion of poi in the dataset:", round(float(data_frame.groupby(["poi"]).size()[1])/len(data_frame),3)*100
 {% endhighlight %}
 
+{% highlight markdown %}
     poi
     False    128
     True      18
     dtype: int64
     
     Portion of poi in the dataset: 12.3
-
+{% endhighlight %}
 
 Since the majority of class is not poi, we will need to take care of this imbalance situation later. This is because in the modeling section, blindly assigning all training points to non-poi's will yield an inflated accuracy of 87.7%, which does not tell the true story at all. 
 
@@ -286,7 +287,7 @@ data_frame.isna().apply(sum)
 {% endhighlight %}
 
 
-
+{% highlight markdown %}
     salary                       0
     to_messages                  0
     deferral_payments            0
@@ -309,6 +310,7 @@ data_frame.isna().apply(sum)
     from_poi_to_this_person      0
     name                         0
     dtype: int64
+{% endhighlight %}
 
 
 After filling missing values, we should check if columns of finance data add up to total payments or total stock values.
@@ -327,12 +329,13 @@ stock_diff = data_frame["total_stock_value"] - stock_df
 print stock_diff[stock_diff>0]
 {% endhighlight %}
 
+{% highlight markdown %}
     8       201715.0
     11    15180562.0
     dtype: float64
     
     Series([], dtype: float64)
-
+{% endhighlight %}
 
 Looks like 9th and 12th person have non-zero results. We need to correct the data for these two persons.
 
@@ -375,10 +378,11 @@ stock_diff = data_frame["total_stock_value"] - stock_df
 print stock_diff[stock_diff>0]
 {% endhighlight %}
 
+{% highlight markdown %}
     Series([], dtype: float64)
     
     Series([], dtype: float64)
-
+{% endhighlight %}
 
 {% highlight python %}
 # First visualize the distribution of each column that is about a person's emails.
@@ -491,7 +495,7 @@ data_frame[["name", "total_payments"]].sort_values(by=["total_payments"], ascend
 </style>
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style="text-align: center;">
       <th></th>
       <th>name</th>
       <th>total_payments</th>
@@ -550,13 +554,6 @@ ax = sns.heatmap(corr_matrix, mask=mask, cmap=cmap, vmax=.5, center=0, square=Tr
                  cbar_kws={"shrink": .5})
 f.add_axes(ax)
 {% endhighlight %}
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x10e8cf910>
-
-
 
 
 ![png]({{ "/images/output_21_1.png" | absolute_url }})
