@@ -248,7 +248,7 @@ data_frame.isna().apply(sum)
 {% endhighlight %}
 
 
-
+{% highlight markdown %}
     salary                        51
     to_messages                   60
     deferral_payments            107
@@ -271,7 +271,7 @@ data_frame.isna().apply(sum)
     from_poi_to_this_person       60
     name                           0
     dtype: int64
-
+{% endhighlight %}
 
 All columns, except poi, email_address, and name, have missing values. The number of missing values in each column cannot be simply ignored. Therefore, try to fill the missing values.
 <br><br>
