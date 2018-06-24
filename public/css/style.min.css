@@ -276,8 +276,6 @@ th {
 table {
   width: 100%;
   border-collapse: collapse;
-  overflow-x: auto;
-  max-width: calc(100% - 14ex)
 }
 
 td,

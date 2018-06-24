@@ -21,6 +21,9 @@ hide_printmsg: true
 show_meta: false
 ---
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
 {% highlight python %}
 import sys, pickle, os, warnings
 import matplotlib.pyplot as plt
@@ -58,14 +61,6 @@ data_frame.head(5)
 
 <div>
 <style scoped>
-    .dataframe {
-        overflow-x: auto;
-        padding: 0.4em;
-        /* Modern browsers */
-        flex: 1;
-        max-width: calc(100% - 14ex);
-    }
-
     .dataframe tbody tr th:only-of-type {
         vertical-align: middle;
     }
@@ -80,7 +75,7 @@ data_frame.head(5)
 </style>
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: left; overflow-x: auto; max-width: calc(100% - 14ex); padding: 0.4em;">
+    <tr style="text-align: left; overflow-x: auto;">
       <th></th>
       <th>salary</th>
       <th>to_messages</th>
