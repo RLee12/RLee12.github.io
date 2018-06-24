@@ -231,7 +231,7 @@ print
 print "Portion of poi in the dataset:", round(float(data_frame.groupby(["poi"]).size()[1])/len(data_frame),3)*100
 {% endhighlight %}
 
-{% highlight markdown %}
+{% highlight html %}
     poi
     False    128
     True      18
@@ -249,7 +249,7 @@ data_frame.isna().apply(sum)
 {% endhighlight %}
 
 
-{% highlight markdown %}
+{% highlight html %}
     salary                        51
     to_messages                   60
     deferral_payments            107
@@ -287,7 +287,7 @@ data_frame.isna().apply(sum)
 {% endhighlight %}
 
 
-{% highlight markdown %}
+{% highlight html %}
     salary                       0
     to_messages                  0
     deferral_payments            0
@@ -378,7 +378,7 @@ stock_diff = data_frame["total_stock_value"] - stock_df
 print stock_diff[stock_diff>0]
 {% endhighlight %}
 
-{% highlight markdown %}
+{% highlight html %}
     Series([], dtype: float64)
     
     Series([], dtype: float64)
