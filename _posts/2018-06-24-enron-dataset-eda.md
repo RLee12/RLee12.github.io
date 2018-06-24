@@ -72,7 +72,7 @@ data_frame.head(5)
 </style>
 <table border="1" class="dataframe">
   <thead>
-    <tr style="text-align: left; table-layout: fixed; display:block; overflow-x: auto;">
+    <tr style="text-align: left;">
       <th></th>
       <th>salary</th>
       <th>to_messages</th>
