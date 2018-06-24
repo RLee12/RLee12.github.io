@@ -20,7 +20,7 @@ gistembed: true
 published: true
 ---
 
-```python
+{% highlight python %}
 import sys, pickle, os, warnings
 import matplotlib.pyplot as plt
 import pandas as pd, seaborn as sns, numpy as np
@@ -28,7 +28,7 @@ import pandas as pd, seaborn as sns, numpy as np
 warnings.filterwarnings('ignore') # Suppress warning messages.
 os.chdir("/Users/ray/Documents/ud120-projects/final_project/")
 pd.set_option("max_columns", 999)
-```
+{% endhighlight %}
 
 
 ```python
