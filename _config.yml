@@ -52,28 +52,28 @@ author:
   name:              Foo Boo
   url:               https://twitter.com/abcd
   avatar:         foo.png
-  #email:           
+  email:          m519160201@gmail.com 
 
 # Owner/author information
 owner:
-  name:           Foo Boo
+  name:           Ray Li
   avatar:         foo.png
   #email:          
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
   description:
   # Social networking links used in footer. Update and remove as you like.
-  twitter:        abcd
-  facebook:       
-  github:         xyz123abc
+  # twitter:        abcd
+  # facebook:       
+  github:         rlee12
   stackexchange:  
-  linkedin:       https://www.linkedin.com/in/foo
+  linkedin:       https://www.linkedin.com/in/ray-li-4b0a9293/
   instagram:      
   flickr:
   tumblr:  
-  google_plus:    https://plus.google.com/+foo
+  # google_plus:    https://plus.google.com/+foo
   # orcid and google scholar IDs are different than standard username.
-  orcid: xyz123abc
-  gscholar: xyz123abc
+  # orcid: xyz123abc
+  # gscholar: xyz123abc
 
 ## sidebar links:
 # For external links add external: true
