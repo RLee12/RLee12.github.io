@@ -18,7 +18,6 @@ show_meta: true
 mathjax: true
 gistembed: true
 published: true
-urlimg: true
 ---
 
 {% highlight python %}
@@ -240,9 +239,7 @@ print "Portion of poi in the dataset:", round(float(data_frame.groupby(["poi"]).
     Portion of poi in the dataset: 12.3
 
 
-<font size=3>
 Since the majority of class is not poi, we will need to take care of this imbalance situation later. This is because in the modeling section, blindly assigning all training points to non-poi's will yield an inflated accuracy of 87.7%, which does not tell the true story at all. 
-</font>
 
 
 {% highlight python %}
@@ -252,7 +249,7 @@ data_frame.isna().apply(sum)
 
 
 
-
+{% highlight %}
     salary                        51
     to_messages                   60
     deferral_payments            107
@@ -275,14 +272,12 @@ data_frame.isna().apply(sum)
     from_poi_to_this_person       60
     name                           0
     dtype: int64
+{% endhighlight %}
 
 
-
-<font size=3>
 All columns, except poi, email_address, and name, have missing values. The number of missing values in each column cannot be simply ignored. Therefore, try to fill the missing values.
 <br><br>
     A careful examination of the document (<em>enron61702insiderpay</em>) shows that we can fill all missing values with 0. This is because the financial data are extracted from that document. NaN values in that document are in fact deliberately left blank, because 1. no information exist for that person or 2. columns other than total_payments and total_stock_value should add up to total_payments and total_stock_value, respectively.
-</font>
 
 
 {% highlight python %}
@@ -294,7 +289,7 @@ data_frame.isna().apply(sum)
 
 
 
-
+{% highlight %}
     salary                       0
     to_messages                  0
     deferral_payments            0
@@ -317,12 +312,10 @@ data_frame.isna().apply(sum)
     from_poi_to_this_person      0
     name                         0
     dtype: int64
+{% endhighlight %}
 
 
-
-<font size=3>
 After filling missing values, we should check if columns of finance data add up to total payments or total stock values.
-</font>
 
 
 {% highlight python %}
@@ -345,9 +338,7 @@ print stock_diff[stock_diff>0]
     Series([], dtype: float64)
 
 
-<font size=3>
 Looks like 9th and 12th person have non-zero results. We need to correct the data for these two persons.
-</font>
 
 
 {% highlight python %}
@@ -388,10 +379,11 @@ stock_diff = data_frame["total_stock_value"] - stock_df
 print stock_diff[stock_diff>0]
 {% endhighlight %}
 
+{% highlight %}
     Series([], dtype: float64)
     
     Series([], dtype: float64)
-
+{% endhighlight %}
 
 
 {% highlight python %}
@@ -410,7 +402,7 @@ plt.tight_layout()
 {% endhighlight %}
 
 
-![png]({{ "output_13_0.png" | urlimg }})
+![png]({{ "output_13_0.png" | site.urlimg }})
 
 
 
@@ -424,7 +416,7 @@ plt.tight_layout()
 {% endhighlight %}
 
 
-![png]({{ "output_14_0.png" | urlimg }})
+![png]({{ "output_14_0.png" | site.urlimg }})
 
 
 
@@ -452,7 +444,7 @@ plt.tight_layout()
 {% endhighlight %}
 
 
-![png]({{ "output_15_0.png" | urlimg }})
+![png]({{ "output_15_0.png" | site.urlimg }})
 
 
 
@@ -471,16 +463,14 @@ plt.tight_layout()
 {% endhighlight %}
 
 
-![png]({{ "output_16_0.png" | urlimg }})
+![png]({{ "output_16_0.png" | site.urlimg }})
 
 
-<font size=3>
 Some takeaways from above plots:
 <ol>
     <li>Every column has many outliers. Those columns are completely stretched by outliers. We should first tackle these outliers before fitting any models</li>
     <li>All distributions are skewed to the right. Spike in every distribution takes more than 50% of data points.</li>
 </ol>
-</font>
 
 
 {% highlight python %}
@@ -545,9 +535,7 @@ data_frame[["name", "total_payments"]].sort_values(by=["total_payments"], ascend
 
 
 
-<font size=3>
 Clearly, TOTAL should be dropped, since this row is just the summary from the document. Another data that should be dropped is Kenneth Lay, because it is well aware that Kenneth Lay, the boss of Enron, was a poi and his existence in the dataset does not tell more about the characteristic of other poi's.
-</font>
 
 
 {% highlight python %}
@@ -577,18 +565,14 @@ f.add_axes(ax)
 
 
 
-![png]({{ "output_21_1.png" | urlimg }})
+![png]({{ "output_21_1.png" | site.urlimg }})
 
 
-<font size=3>
 The correlation heatmap coincides with the data structure that email data almost always correlate with email data, and finance data almost always correlate with finance data.
 <br><br>
 This correlation heatmap can guide us in the feature engineering section. For example, we can create a feature, the ratio of from_this_person_to_poi over to_messages. This feature can inform us the portion of this person's emails going to poi, indicating the frequency of communication between this person and poi.
-</font>
 
-<font size=3.5>
 Next, let's use intuition to plot some scatter plots and examine whether some features good indicators of poi.
-</font>
 
 
 {% highlight python %}
@@ -606,9 +590,7 @@ sns.pairplot(data_frame, hue="poi", vars=["salary", "bonus", "exercised_stock_op
 
 
 
-![png]({{ "output_24_1.png" | urlimg }})
+![png]({{ "output_24_1.png" | site.urlimg }})
 
 
-<font size=3.5>
 Quitely interesting, exercised_stock_options and long_term_incentive seem like good indicators of poi. Of course we will examine importance of each feature in the modeling section.
-</font>
