@@ -249,7 +249,6 @@ data_frame.isna().apply(sum)
 
 
 
-{% highlight %}
     salary                        51
     to_messages                   60
     deferral_payments            107
@@ -272,7 +271,6 @@ data_frame.isna().apply(sum)
     from_poi_to_this_person       60
     name                           0
     dtype: int64
-{% endhighlight %}
 
 
 All columns, except poi, email_address, and name, have missing values. The number of missing values in each column cannot be simply ignored. Therefore, try to fill the missing values.
@@ -289,7 +287,6 @@ data_frame.isna().apply(sum)
 
 
 
-{% highlight %}
     salary                       0
     to_messages                  0
     deferral_payments            0
@@ -312,7 +309,6 @@ data_frame.isna().apply(sum)
     from_poi_to_this_person      0
     name                         0
     dtype: int64
-{% endhighlight %}
 
 
 After filling missing values, we should check if columns of finance data add up to total payments or total stock values.
@@ -379,11 +375,9 @@ stock_diff = data_frame["total_stock_value"] - stock_df
 print stock_diff[stock_diff>0]
 {% endhighlight %}
 
-{% highlight %}
     Series([], dtype: float64)
     
     Series([], dtype: float64)
-{% endhighlight %}
 
 
 {% highlight python %}
