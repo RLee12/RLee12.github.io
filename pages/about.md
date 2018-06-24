@@ -3,7 +3,6 @@ layout: page
 title: About
 permalink: /about/
 # show_meta: true
-imagefeature: little-squirrel.jpg
 published: true
 # description: "About example.com...."
 category: views
