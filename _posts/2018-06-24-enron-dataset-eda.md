@@ -329,7 +329,7 @@ stock_diff = data_frame["total_stock_value"] - stock_df
 print stock_diff[stock_diff>0]
 {% endhighlight %}
 
-{% highlight markdown %}
+{% highlight html %}
     8       201715.0
     11    15180562.0
     dtype: float64
