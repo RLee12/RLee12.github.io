@@ -47,7 +47,7 @@ with open("final_project_dataset.pkl", "r") as data_file:
 data_frame = pd.DataFrame.from_dict(data_dict, orient="index")
 {% endhighlight %}
 
-The next step is to convert the data type of columns. The imported data type in each column is of type `object`, but a quick look will reveal clearly that almost every column is of type `numeric`. Converting the data type will save us tremendously amount of hustle.
+The next step is to convert the data type of columns. The imported data type in each column is of type `object`, but a quick look will reveal clearly that almost every column is of type `numeric`. Converting the data type will save us tremendous amount of hustle.
 
 {% highlight python %}
 # Convert supposedly numeric type columns to type numeric.
@@ -235,7 +235,7 @@ data_frame.head(5)
 
 </div>
 
-So many missing values! That definitely means filling NAs later. Now I am more interested in how the distribution of the class looks like:
+So many missing values! That definitely means filling NAs later. Now I am more interested in how the distribution of each class looks like:
 
 {% highlight python %}
 # Inspect number of data points in each class.
@@ -345,7 +345,7 @@ print stock_diff[stock_diff>0]
     Series([], dtype: float64)
 {% endhighlight %}
 
-Looks like 9th and 12th person have non-zero results. We need to correct the data for these two persons.
+Looks like 9th and 12th person (Note that index in `Python` starts with 0. So `1st` element in a dataframe will have index `0`) have non-zero results. We need to correct the data for these two persons.
 
 {% highlight python %}
 # Correct the data for 9th and 12th person.
