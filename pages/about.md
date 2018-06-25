@@ -27,7 +27,7 @@ tags:
 
 >A passionate seeker who constantly looks for meaning of life. Love challenges, and thrive at solving them. Boredom of life suffocates creativity. Curiosity steers the way out.
 
-I am currently a Data Analyst in the renewable energy industry based in Folsom, California. More frankly, renewable energy is just a buzz work for solar and wind energy. I work with energy data at work. 
+I am currently a Data Analyst in the renewable energy industry based in Folsom, California. More frankly, renewable energy is just a buzz word for solar and wind energy. I work with energy data at work. 
 
 Solar data is fun to work with, partially because solar irradiance has quite a typical pattern: the sun goes up in the morning and goes down in the evening, so visualizing a sunny, cloudless day's solar irradiance will yield a perfect bell-shaped curve. 
 
