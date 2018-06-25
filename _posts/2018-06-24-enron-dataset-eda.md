@@ -3,7 +3,7 @@ layout: post
 title: "Enron Dataset: Exploratory Data Analysis"
 date: "2018-06-24"
 slug: "enron-dataset-eda"
-description: "The Enron scandal provides a great reservoir for data analysis. This blog is the first piece to explore the Enron dataset, where exploratory data analysis is carried out and paves the way for feature engineering and modeling."
+description: "The Enron financial and email data provides a great reservoir for data analysis. This blog is the first piece of the following posts to explore the Enron dataset. Exploratory data analysis is carried out and paves the way for future feature engineering and modeling."
 category: 
   - data science
   - featured
@@ -11,7 +11,6 @@ category:
 tags:
   - exploratory data analysis
   - data science
-show_meta: true
 mathjax: true
 gistembed: true
 published: true
@@ -19,7 +18,19 @@ hide_printmsg: true
 show_meta: false
 ---
 
+## Introduction 
 
+### Dataset Background
+
+The Enron financial + email dataset collects information following the Enron scandal, a financial scandal that eventually led to the bankruptcy of the Enron Corporation[^1]. After initial release of 1.6 million emails sent and received by Enron executives, the Federal Energy Regulatory Commission (FERC) rolled back the data and published another version that contained less sentitive information. The dataset used here contains metadata about emails and financial information. I deliberately leave emails themselves out of the analysis because of the excess amount of effort required to mine those emails. That being said, I would come back and visit those emails sometime in the future (Trust me I really will).  
+
+This exploratory data analysis is the first piece of upcoming posts that leverage the data to build a classifier to identify persons of interests (POIs). The POIs are individuals who were eventually charged with fraud or other criminal activities in the Enron investigation. 
+
+The main goal of EDA revolves around the dataset. I want to learn the dataset, and hopefully discover some interesting factors revealing who is guilty and who is not.
+
+## Data Cleaning
+
+First of all is import dependencies and the dataset.
 
 {% highlight python %}
 import sys, pickle, os, warnings
@@ -29,31 +40,31 @@ import pandas as pd, seaborn as sns, numpy as np
 warnings.filterwarnings('ignore') # Suppress warning messages.
 os.chdir("/Users/ray/Documents/ud120-projects/final_project/")
 pd.set_option("max_columns", 999)
-{% endhighlight %}
 
-
-{% highlight python %}
 # Load the dictionary containing the dataset, and convert the dictionary to dataframe.
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file) 
 data_frame = pd.DataFrame.from_dict(data_dict, orient="index")
+{% endhighlight %}
 
-# Convert supposedly numeric columns to type numeric.
+The next step is to convert the data type of columns. The imported data type in each column is of type `object`, but a quick look will reveal clearly that almost every column is of type `numeric`. Converting the data type will save us tremendously amount of hustle.
+
+{% highlight python %}
+# Convert supposedly numeric type columns to type numeric.
 cols = data_frame.columns.drop(["poi", "email_address"])
 data_frame[cols] = data_frame[cols].apply(pd.to_numeric, errors="coerce")
 
-# Add a name column and change the originally name index to numeric index.
+# Add a column called name and change the originally name index to numeric index.
 data_frame.drop(["email_address"], axis=1, inplace=True)
 data_frame["name"] = data_frame.index
 data_frame.index = xrange(len(data_frame))
 {% endhighlight %}
 
+Now let's take a look at the first 5 elements in the dataframe. 
 
 {% highlight python %}
 data_frame.head(5)
 {% endhighlight %}
-
-
 
 <!-- Add the css script to truncate long table and make it scroll. -->
 <div style="overflow-x: scroll;" markdown="block">
@@ -224,8 +235,7 @@ data_frame.head(5)
 
 </div>
 
-
-
+So many missing values! That definitely means filling NAs later. Now I am more interested in how the distribution of the class looks like:
 
 {% highlight python %}
 # Inspect number of data points in each class.
@@ -243,14 +253,12 @@ print "Portion of poi in the dataset:", round(float(data_frame.groupby(["poi"]).
     Portion of poi in the dataset: 12.3
 {% endhighlight %}
 
-Since the majority of class is not poi, we will need to take care of this imbalance situation later. This is because in the modeling section, blindly assigning all training points to non-poi's will yield an inflated accuracy of 87.7%, which does not tell the true story at all. 
-
+Since the majority of class is not poi, we will need to take care of this imbalance situation later. In the modeling section, blindly assigning all training points to non-poi's will yield an astonishing inflated accuracy of 87.7%, which does not tell the true story at all. 
 
 {% highlight python %}
 # Inspect number of NA's after applying type conversion.
 data_frame.isna().apply(sum)
 {% endhighlight %}
-
 
 {% highlight html %}
     salary                        51
@@ -277,10 +285,9 @@ data_frame.isna().apply(sum)
     dtype: int64
 {% endhighlight %}
 
-All columns, except poi, email_address, and name, have missing values. The number of missing values in each column cannot be simply ignored. Therefore, try to fill the missing values.
-<br><br>
-    A careful examination of the document (<em>enron61702insiderpay</em>) shows that we can fill all missing values with 0. This is because the financial data are extracted from that document. NaN values in that document are in fact deliberately left blank, because 1. no information exist for that person or 2. columns other than total_payments and total_stock_value should add up to total_payments and total_stock_value, respectively.
+All columns, except poi, email_address, and name, have missing values. The number of missing values in each column cannot be simply ignored.
 
+A careful examination of the document (<em>enron61702insiderpay</em>) shows that we can fill all missing values with 0. This is because the financial data are extracted from that document. NaN values in that document are in fact deliberately left blank, because 1. no information exists for that person or 2. columns other than total_payments and total_stock_value should add up to total_payments and total_stock_value, respectively.
 
 {% highlight python %}
 # Fill missing values with 0.
@@ -288,7 +295,6 @@ data_frame = data_frame.fillna(value=0)
 
 data_frame.isna().apply(sum)
 {% endhighlight %}
-
 
 {% highlight html %}
     salary                       0
@@ -316,8 +322,7 @@ data_frame.isna().apply(sum)
 {% endhighlight %}
 
 
-After filling missing values, we should check if columns of finance data add up to total payments or total stock values.
-
+After filling missing values, we should check if columns of financial data add up to total payments or total stock values.
 
 {% highlight python %}
 income_df = (data_frame[["salary","deferral_payments","bonus", "expenses", "loan_advances", "other", "director_fees", 
@@ -342,7 +347,6 @@ print stock_diff[stock_diff>0]
 
 Looks like 9th and 12th person have non-zero results. We need to correct the data for these two persons.
 
-
 {% highlight python %}
 # Correct the data for 9th and 12th person.
 data_frame.at[8, "exercised_stock_options"] = 0
@@ -366,7 +370,6 @@ data_frame.at[11, "deferral_payments"] = 0
 data_frame.at[11, "expenses"] = 137864
 {% endhighlight %}
 
-
 {% highlight python %}
 # Check those two persons again to see if the data have been corrected.
 income_df = (data_frame[["salary","deferral_payments","bonus", "expenses", "loan_advances", "other", "director_fees", 
@@ -386,6 +389,10 @@ print stock_diff[stock_diff>0]
     
     Series([], dtype: float64)
 {% endhighlight %}
+
+Awesome! Now we can do some visualization.
+
+## Data Visualization
 
 {% highlight python %}
 # First visualize the distribution of each column that is about a person's emails.
@@ -469,8 +476,8 @@ plt.tight_layout()
 
 Some takeaways from above plots:
 <ol>
-    <li>Every column has many outliers. Those columns are completely stretched by outliers. We should first tackle these outliers before fitting any models</li>
-    <li>All distributions are skewed to the right. Spike in every distribution takes more than 50% of data points.</li>
+    <li>Every column has many outliers. Those columns are completely stretched by outliers. We should tackle these outliers before fitting any models</li>
+    <li>All distributions are skewed to the right. Spikes some distributions take more than 50% of data points.</li>
 </ol>
 
 
@@ -478,9 +485,6 @@ Some takeaways from above plots:
 # Tackle the outliers.
 data_frame[["name", "total_payments"]].sort_values(by=["total_payments"], ascending=False).head(5)
 {% endhighlight %}
-
-
-
 
 <div>
 <style scoped>
@@ -534,9 +538,7 @@ data_frame[["name", "total_payments"]].sort_values(by=["total_payments"], ascend
 </table>
 </div>
 
-
-
-Clearly, TOTAL should be dropped, since this row is just the summary from the document. Another data that should be dropped is Kenneth Lay, because it is well aware that Kenneth Lay, the boss of Enron, was a poi and his existence in the dataset does not tell more about the characteristic of other poi's.
+Clearly, row TOTAL should be dropped, since this row is just the summary from the document. Another row that should be dropped is Kenneth Lay, because it is well aware that Kenneth Lay, the boss of Enron, was a poi and his existence in the dataset does not tell more about the characteristic of other poi's.
 
 
 {% highlight python %}
@@ -564,10 +566,9 @@ f.add_axes(ax)
 
 The correlation heatmap coincides with the data structure that email data almost always correlate with email data, and finance data almost always correlate with finance data.
 <br><br>
-This correlation heatmap can guide us in the feature engineering section. For example, we can create a feature, the ratio of from_this_person_to_poi over to_messages. This feature can inform us the portion of this person's emails going to poi, indicating the frequency of communication between this person and poi.
+This correlation heatmap can guide us in the feature engineering section. For example, we can create a feature called the ratio of from_this_person_to_poi over to_messages. This feature can inform us the portion of this person's emails going to poi, indicating the frequency of communication between this person and poi.
 
-Next, let's use intuition to plot some scatter plots and examine whether some features are good indicators of poi.
-
+Next, let's use intuition and insight from the heatmap to plot some scatter plots and examine whether some features are good indicators of poi.
 
 {% highlight python %}
 sns.set(); sns.set_context("notebook")
@@ -576,12 +577,12 @@ sns.pairplot(data_frame, hue="poi", vars=["salary", "bonus", "exercised_stock_op
              palette="husl")
 {% endhighlight %}
 
-
-
-
-
-
 ![png]({{ "/images/output_24_1.png" | absolute_url }})
 
+Quite interestingly, exercised_stock_options and long_term_incentive seem like good indicators of poi. Of course we will examine the importance of each feature in the modeling section.
 
-Quite interesting, exercised_stock_options and long_term_incentive seem like good indicators of poi. Of course we will examine importance of each feature in the modeling section.
+## Conclusion
+
+
+
+[^1]: [Enron Scandal](https://en.wikipedia.org/wiki/Enron_scandal)
