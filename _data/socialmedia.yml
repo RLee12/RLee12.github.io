@@ -13,6 +13,11 @@
   class: fa fa-github-square
   title: Code repository
 
+- name: LinkedIn
+  url: https://www.linkedin.com/in/ray-li-4b0a9293/
+  class: fa fa-linkedin-square
+  title: LinkedIn profile
+
 # - name: Contact
 #   url: "/contact/"
 #   class: fa fa-envelope-square
