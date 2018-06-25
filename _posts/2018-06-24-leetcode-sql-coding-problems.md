@@ -21,7 +21,7 @@ show_meta: false
 
 The `Trips` table holds all taxi trips. Each trip has a unique Id, while Client_Id and Driver_Id are both foreign keys to the Users_Id at the `Users` table. Status is an ENUM type of (‘completed’, ‘cancelled_by_driver’, ‘cancelled_by_client’).
 
-<div style="overflow-x: scroll;" markdown="block">
+<div style="font-size: 60%">
 {% highlight html %}
 +----+-----------+-----------+---------+--------------------+----------+
 | Id | Client_Id | Driver_Id | City_Id |        Status      |Request_at|
