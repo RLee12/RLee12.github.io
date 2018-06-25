@@ -8,10 +8,10 @@
 #   class: fa fa-google-plus-square
 #   title: "Follow me +foo"
 
-# - name: GitHub
-#   url: https://github.com/rlee12
-#   class: fa fa-github-square
-#   title: Code repository
+- name: GitHub
+  url: https://github.com/rlee12
+  class: fa fa-github-square
+  title: Code repository
 
 # - name: Contact
 #   url: "/contact/"
