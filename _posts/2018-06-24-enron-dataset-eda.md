@@ -345,7 +345,7 @@ print stock_diff[stock_diff>0]
     Series([], dtype: float64)
 {% endhighlight %}
 
-Looks like 9th and 12th person (Note that index in `Python` starts with 0. So `1st` element in a dataframe will have index `0`) have non-zero results. We need to correct the data for these two persons.
+Looks like 9th and 12th person (Note that index in `Python` starts with `0`. So 1st element in a dataframe will have index `0`) have non-zero results. We need to correct the data for these two persons.
 
 {% highlight python %}
 # Correct the data for 9th and 12th person.
