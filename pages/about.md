@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Something About Ray
+title: About
 permalink: /about/
 published: true
 description: "Something about Ray"
