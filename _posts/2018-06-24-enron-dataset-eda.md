@@ -564,7 +564,7 @@ The correlation heatmap coincides with the data structure that email data almost
 <br><br>
 This correlation heatmap can guide us in the feature engineering section. For example, we can create a feature, the ratio of from_this_person_to_poi over to_messages. This feature can inform us the portion of this person's emails going to poi, indicating the frequency of communication between this person and poi.
 
-Next, let's use intuition to plot some scatter plots and examine whether some features good indicators of poi.
+Next, let's use intuition to plot some scatter plots and examine whether some features are good indicators of poi.
 
 
 {% highlight python %}
@@ -577,12 +577,9 @@ sns.pairplot(data_frame, hue="poi", vars=["salary", "bonus", "exercised_stock_op
 
 
 
-    <seaborn.axisgrid.PairGrid at 0x10e9939d0>
-
-
 
 
 ![png]({{ "/images/output_24_1.png" | absolute_url }})
 
 
-Quitely interesting, exercised_stock_options and long_term_incentive seem like good indicators of poi. Of course we will examine importance of each feature in the modeling section.
+Quite interesting, exercised_stock_options and long_term_incentive seem like good indicators of poi. Of course we will examine importance of each feature in the modeling section.
