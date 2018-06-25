@@ -2,7 +2,6 @@
 layout: page
 title: About
 permalink: /about/
-# show_meta: true
 published: true
 description: "Something about Ray"
 category: views
@@ -26,4 +25,12 @@ tags:
 <img src="{{ site.urlimg }}{{ site.owner.avatar }}" alt="{{ site.owner.name }}'s photo" itemprop="image" class="post-avatar img-circle img-responsive"/> 
 </div>
 
-A passionate seeker who constantly looks for meaning of life. Love challenges, and thrive at solving them. Boredom of life suffocates creativity. Curiosity steers the way out.
+>A passionate seeker who constantly looks for meaning of life. Love challenges, and thrive at solving them. Boredom of life suffocates creativity. Curiosity steers the way out.
+
+I am currently a Data Analyst in the renewable energy industry based in Folsom, California. More frankly, renewable energy is just a buzz work for solar and wind energy. I work with energy data at work. 
+
+Personally speaking, solar data is fun to work with, because solar irradiance has quite a typical pattern: the sun goes up in the morning and goes down in the evening, so visualizing a sunny, cloudless day's solar irradiance will yield a perfect bell-shaped curve. 
+
+I like running (in my heart) so translating that sentence just means I am often too occupied by other stuff to go out and run. 
+
+But I do like running!
