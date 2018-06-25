@@ -47,7 +47,7 @@ with open("final_project_dataset.pkl", "r") as data_file:
 data_frame = pd.DataFrame.from_dict(data_dict, orient="index")
 {% endhighlight %}
 
-The next step is to convert the data type of columns. The imported data type in each column is of type `object`, but a quick look will reveal clearly that almost every column is of type `numeric`. Converting the data type will save us tremendous amount of hustle.
+The next step is to convert the data type of columns. The imported data type in each column is of type `object`, but a quick look will reveal clearly that almost every column is of type `numeric`, because metadata about emails and financial information are all numbers. Also, we will not need to manually convert data types when doing aggregation or visualization. Converting the data type will save us tremendous amount of hustle.
 
 {% highlight python %}
 # Convert supposedly numeric type columns to type numeric.
@@ -235,6 +235,7 @@ data_frame.head(5)
 
 </div>
 
+
 So many missing values! That definitely means filling NAs later. Now I am more interested in how the distribution of each class looks like:
 
 {% highlight python %}
@@ -285,9 +286,9 @@ data_frame.isna().apply(sum)
     dtype: int64
 {% endhighlight %}
 
-All columns, except poi, email_address, and name, have missing values. The number of missing values in each column cannot be simply ignored.
+All columns, except `poi`, `email_address`, and `name`, have missing values. The number of missing values in each column cannot be simply ignored.
 
-A careful examination of the document (<em>enron61702insiderpay</em>) shows that we can fill all missing values with 0. This is because the financial data are extracted from that document. NaN values in that document are in fact deliberately left blank, because 1. no information exists for that person or 2. columns other than total_payments and total_stock_value should add up to total_payments and total_stock_value, respectively.
+A careful examination of the document (<em>enron61702insiderpay</em>) shows that we can fill all missing values with 0s. This is because the financial data are extracted from that document. Missing values in that document are in fact deliberately left blank, because 1. no information exists for that person or 2. columns other than `total_payments` and `total_stock_value` should add up to `total_payments` and `total_stock_value`, respectively.
 
 {% highlight python %}
 # Fill missing values with 0.
@@ -394,6 +395,8 @@ Awesome! Now we can do some visualization.
 
 ## Data Visualization
 
+The goal here is to visually examine each feature. I want to know the impact of outliers, the spread of each feature, how features are correlated and how data points are distributed in each feature. The insight can provide valuable guidance in feature engineering and modeling.
+
 {% highlight python %}
 # First visualize the distribution of each column that is about a person's emails.
 plot_email_data = (data_frame[["to_messages","shared_receipt_with_poi","from_messages","from_this_person_to_poi",
@@ -476,8 +479,8 @@ plt.tight_layout()
 
 Some takeaways from above plots:
 <ol>
-    <li>Every column has many outliers. Those columns are completely stretched by outliers. We should tackle these outliers before fitting any models</li>
-    <li>All distributions are skewed to the right. Spikes some distributions take more than 50% of data points.</li>
+    <li>Every feature has many outliers. The distributions of those features are completely stretched by outliers in boxplots. We should tackle these outliers before fitting any models. Given there are only 146 data points in the dataset, I am reluctant to remove any outliers, because too few of data points will not be enough to produce a meaningful, generalized model.</li>
+    <li>All distributions are either skewed to the right or left, and the favorable bell-shaped Gaussian distribution does not appear above. We should notice that spikes in some distributions take more than 50% of data points. This implies the majority of people show similar behavior.</li>
 </ol>
 
 
@@ -538,7 +541,7 @@ data_frame[["name", "total_payments"]].sort_values(by=["total_payments"], ascend
 </table>
 </div>
 
-Clearly, row TOTAL should be dropped, since this row is just the summary from the document. Another row that should be dropped is Kenneth Lay, because it is well aware that Kenneth Lay, the boss of Enron, was a poi and his existence in the dataset does not tell more about the characteristic of other poi's.
+Clearly, row TOTAL should be dropped, since this row is just the summary from the document. Another row that should be dropped is Kenneth Lay, because it is well aware that Kenneth Lay, the boss of Enron, was a poi and his existence in the dataset does not tell more about the characteristic of other poi's: Kenneth Lay's total payment beats Mark Frevert's total payment by a factor of 6! 
 
 
 {% highlight python %}
@@ -566,7 +569,7 @@ f.add_axes(ax)
 
 The correlation heatmap coincides with the data structure that email data almost always correlate with email data, and finance data almost always correlate with finance data.
 
-This correlation heatmap can guide us in the feature engineering section. For example, we can create a feature called the ratio of from_this_person_to_poi over to_messages. This feature can inform us the portion of this person's emails going to poi, indicating the frequency of communication between this person and poi.
+This correlation heatmap can guide us in the feature engineering section. For example, we can create a feature called the ratio of `from_this_person_to_poi` over `to_messages`. This feature can inform us the portion of this person's emails going to poi, indicating the frequency of communication between this person and poi.
 
 Next, let's use intuition and insight from the heatmap to plot some scatter plots and examine whether some features are good indicators of poi.
 
@@ -579,7 +582,7 @@ sns.pairplot(data_frame, hue="poi", vars=["salary", "bonus", "exercised_stock_op
 
 ![png]({{ "/images/output_24_1.png" | absolute_url }})
 
-Quite interestingly, exercised_stock_options and long_term_incentive seem like good indicators of poi. Of course we will examine the importance of each feature in the modeling section.
+Quite interestingly, `exercised_stock_options` and `long_term_incentive` seem like good indicators of poi. Of course we will examine the importance of each feature in the modeling section.
 
 ## Conclusion
 
