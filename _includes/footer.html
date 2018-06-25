@@ -1,8 +1,12 @@
 <div class="custom-footer" style="display: block;">
   <div class="footer-social-icons">
     <ul class="social-icons">
-      {% for social_item in site.data.socialmedia %} {% if social_item.url contains 'http' %} {% assign domain = '' %} {% else
-      %} {% assign domain = site.url %} {% endif %}
+      {% for social_item in site.data.socialmedia %} 
+        {% if social_item.url contains 'http' %} 
+          {% assign domain = '' %} 
+        {% else %} 
+          {% assign domain = site.url %} 
+      {% endif %}
       <li>
         <a href="{{ domain }}{{ social_item.url }}" rel="me" {% if social_item.url contains 'http' %} target="_blank" {% endif
           %} class="social-icons" title="{{ social_item.title }}">
@@ -13,6 +17,9 @@
     </ul>
   </div>
   <h6 class="text-footer">
-  Last modified: {{ site.date }} {{ site.time }}
+    <a rel="license" href="{{ site.url }}/disclosure/" title="CC BY-NC-SA 4.0 License, link to site disclosure" class="social-icon">
+      <i class="fa fa-creative-commons"></i>
+    </a>
+    Last modified: {{ site.date | date: "%Y-%m-%d" }} {{ site.time | date: "%H:%M" }}
   </h6>
 </div>
