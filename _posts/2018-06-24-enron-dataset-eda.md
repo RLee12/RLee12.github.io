@@ -565,7 +565,7 @@ f.add_axes(ax)
 
 
 The correlation heatmap coincides with the data structure that email data almost always correlate with email data, and finance data almost always correlate with finance data.
-<br><br>
+
 This correlation heatmap can guide us in the feature engineering section. For example, we can create a feature called the ratio of from_this_person_to_poi over to_messages. This feature can inform us the portion of this person's emails going to poi, indicating the frequency of communication between this person and poi.
 
 Next, let's use intuition and insight from the heatmap to plot some scatter plots and examine whether some features are good indicators of poi.
