@@ -564,7 +564,8 @@ h6 {
 
 .masthead-title {
   margin-top: 0;
-  color: #505050
+  color: #505050;
+  text-align: center
 }
 
 .masthead-title a {
