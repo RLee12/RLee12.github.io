@@ -29,8 +29,8 @@ tags:
 
 I am currently a Data Analyst in the renewable energy industry based in Folsom, California. More frankly, renewable energy is just a buzz work for solar and wind energy. I work with energy data at work. 
 
-Personally speaking, solar data is fun to work with, because solar irradiance has quite a typical pattern: the sun goes up in the morning and goes down in the evening, so visualizing a sunny, cloudless day's solar irradiance will yield a perfect bell-shaped curve. 
+Solar data is fun to work with, partially because solar irradiance has quite a typical pattern: the sun goes up in the morning and goes down in the evening, so visualizing a sunny, cloudless day's solar irradiance will yield a perfect bell-shaped curve. 
 
-I like running (in my heart) so translating that sentence just means I am often too occupied by other stuff to go out and run. 
+Personally, I like running (in my heart) so translating that sentence just means I am often too occupied by other stuff to go out and run. 
 
 But I do like running!
