@@ -292,7 +292,7 @@ A careful examination of the financial data document (<em>enron61702insiderpay</
 
 The handling with missing values of email metadata is more intricate. For now I am considering two approaches: fill missing values with median values or with 0s. I am more inclined to the former approach. This Enron dataset is a combined dataset from two distinct sources: Enron emails and financial data document. When joined together, some people, only present in the document but not in the Enron emails, do not have any email metadata, but this does not mean these people did not send or receive emails at all.  
 
-A heuristic way to handle these missing values is to fill with medians. By this way we have retained useful information. So I proceed with filling missing values of financial data with 0s and email metadata with median values.
+A heuristic way to handle these missing values is to fill them with medians. By this way we have retained useful information. So I proceed with filling missing values of financial data with 0s and email metadata with median values.
 
 {% highlight python %}
 # Fill missing values with 0.
