@@ -543,9 +543,11 @@ data_frame[["name", "total_payments"]].sort_values(by=["total_payments"], ascend
 
 Clearly, row TOTAL should be dropped, since this row is just the summary from the document. Another row that should be dropped is Kenneth Lay, because it is well aware that Kenneth Lay, the boss of Enron, was a poi and his existence in the dataset does not tell more about the characteristic of other poi's: Kenneth Lay's total payment beats Mark Frevert's total payment by a factor of 6! 
 
+Visiting the original finance data document reveals there is a row with name THE TRAVEL AGENCY IN THE PARK, which, according to the document, is a company co-owned by Enron CEO's sister Sharon Lay. Clearly including this data in our analysis serves no meaningful purpose, so I drop this row.
 
 {% highlight python %}
-data_frame = data_frame.drop([130,79]).reset_index(drop=True)
+# Drop TOTAL, LAY KENNETH L, and THE TRAVEL AGENCY IN THE PARK
+data_frame = data_frame.drop([130,79,126]).reset_index(drop=True)
 {% endhighlight %}
 
 
