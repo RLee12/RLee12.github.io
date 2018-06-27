@@ -288,7 +288,11 @@ data_frame.isna().apply(sum)
 
 All columns, except `poi`, `email_address`, and `name`, have missing values. The number of missing values in each column cannot be simply ignored.
 
-A careful examination of the document (<em>enron61702insiderpay</em>) shows that we can fill all missing values with 0s. This is because the financial data are extracted from that document. Missing values in that document are in fact deliberately left blank, because 1. no information exists for that person or 2. columns other than `total_payments` and `total_stock_value` should add up to `total_payments` and `total_stock_value`, respectively.
+A careful examination of the financial data document (<em>enron61702insiderpay</em>) shows that we can fill all missing values of financial data with 0s. This is because the financial data are extracted from that document. Missing values in that document are in fact deliberately left blank, because 1. no information exists for that person or 2. columns other than `total_payments` and `total_stock_value` should add up to `total_payments` and `total_stock_value`, respectively.
+
+The handling with missing values of email metadata is more intricate. For now I have two approaches: fill missing values with median value or with 0s. I am more inclined to the latter approach, because this Enron dataset is a combined dataset from two distinct sources: Enron emails and financial data document. Some people's emails are simply not present in the Enron emails, so we cannot know for certain these people's email metadata. My fear is that filling missing values of email metadata with median or mean would introduce extra noise, therefore causing models to fit noise. 
+
+So I proceed with filling both typles of missing values with 0s.
 
 {% highlight python %}
 # Fill missing values with 0.
