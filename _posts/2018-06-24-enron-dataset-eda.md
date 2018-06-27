@@ -295,7 +295,7 @@ The handling with missing values of email metadata is more intricate. For now I 
 A heuristic way to handle these missing values is to fill them with medians. By this way we have retained useful information. So I proceed with filling missing values of financial data with 0s and email metadata with median values.
 
 {% highlight python %}
-# Fill missing values with 0.
+# Fill missing values of financial data with 0s.
 data_frame = data_frame.fillna(value=0)
 
 data_frame.isna().apply(sum)
