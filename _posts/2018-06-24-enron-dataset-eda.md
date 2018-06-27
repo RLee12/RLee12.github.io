@@ -290,9 +290,9 @@ All columns, except `poi`, `email_address`, and `name`, have missing values. The
 
 A careful examination of the financial data document (<em>enron61702insiderpay</em>) shows that we can fill all missing values of financial data with 0s. This is because the financial data are extracted from that document. Missing values in that document are in fact deliberately left blank, because 1. no information exists for that person or 2. columns other than `total_payments` and `total_stock_value` should add up to `total_payments` and `total_stock_value`, respectively.
 
-The handling with missing values of email metadata is more intricate. For now I have two approaches: fill missing values with median value or with 0s. I am more inclined to the latter approach, because this Enron dataset is a combined dataset from two distinct sources: Enron emails and financial data document. Some people's emails are simply not present in the Enron emails, so we cannot know for certain these people's email metadata. My fear is that filling missing values of email metadata with median or mean would introduce extra noise, therefore causing models to fit noise. 
+The handling with missing values of email metadata is more intricate. For now I am considering two approaches: fill missing values with median values or with 0s. I am more inclined to the former approach. This Enron dataset is a combined dataset from two distinct sources: Enron emails and financial data document. When joined together, some people, only present in the document but not in the Enron emails, do not have any email metadata, but this does not mean these people did not send or receive emails at all.  
 
-So I proceed with filling both typles of missing values with 0s.
+A heuristic way to handle these missing values is to fill with medians. By this way we have retained useful information. So I proceed with filling missing values of financial data with 0s and email metadata with median values.
 
 {% highlight python %}
 # Fill missing values with 0.
