@@ -59,6 +59,8 @@ Write a SQL query to find employees who earn the top three salaries in each of t
 +------------+----------+--------+
 {% endhighlight %}
 
+MS SQL solution: 
+
 {% highlight sql %}
 SELECT Name AS Department, Employee, Salary 
 FROM 
