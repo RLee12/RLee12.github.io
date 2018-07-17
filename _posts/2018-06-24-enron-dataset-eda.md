@@ -33,9 +33,14 @@ The main goal of EDA revolves around the dataset. I want to learn the dataset, a
 First of all is import dependencies and the dataset.
 
 {% highlight python %}
-import sys, pickle, os, warnings
+import sys
+import pickle
+import os
+import warnings
 import matplotlib.pyplot as plt
-import pandas as pd, seaborn as sns, numpy as np
+import pandas as pd
+import seaborn as sns
+import numpy as np
 
 warnings.filterwarnings('ignore') # Suppress warning messages.
 os.chdir("/Users/ray/Documents/ud120-projects/final_project/")
@@ -290,12 +295,15 @@ All columns, except `poi`, `email_address`, and `name`, have missing values. The
 
 A careful examination of the financial data document (<em>enron61702insiderpay</em>) shows that we can fill all missing values of financial data with 0s. This is because the financial data are extracted from that document. Missing values in that document are in fact deliberately left blank, because 1). no information exists for that person or 2). columns other than `total_payments` and `total_stock_value` should add up to `total_payments` and `total_stock_value`, respectively.
 
-The handling with missing values of email metadata is more intricate. For now I am considering two approaches: fill missing values with median values or with 0s. I am more inclined to the former approach. This Enron dataset is a combination from two data sources: Enron emails and financial data document. When two data sources joined together, some people, only present in the document but not in the Enron emails, do not have any email metadata, but this does not mean these people did not send or receive emails at all.  
+The handling with missing values of email metadata is more intricate. For now I am considering two approaches: fill missing values with median values or with 0s. I am more inclined to the former approach. This Enron dataset is a combination from two data sources: Enron emails and financial data document. When two data sources were joined together, some people, only present in the document but not in the Enron emails, do not have any email metadata, but this does not mean these people did not send or receive emails at all.  
 
 A heuristic way to handle these missing values is to fill them with medians. By this way we have retained useful information. So I proceed with filling missing values of financial data with 0s and email metadata with median values.
 
 {% highlight python %}
-# Fill missing values of financial data with 0s.
+# Fill missing values of financial data with 0, and those of email data with median values.
+email_data_frame = (data_frame[["to_messages","shared_receipt_with_poi","from_messages","from_this_person_to_poi","from_poi_to_this_person"]])
+email_median = email_data_frame.median(axis=0)
+data_frame[["to_messages","shared_receipt_with_poi","from_messages","from_this_person_to_poi","from_poi_to_this_person"]] = email_data_frame.fillna(value=email_median, axis=0)
 data_frame = data_frame.fillna(value=0)
 
 data_frame.isna().apply(sum)
@@ -330,8 +338,7 @@ data_frame.isna().apply(sum)
 After filling missing values, we should check if columns of financial data add up to total payments or total stock values.
 
 {% highlight python %}
-income_df = (data_frame[["salary","deferral_payments","bonus", "expenses", "loan_advances", "other", "director_fees", 
-                         "deferred_income", "long_term_incentive"]].sum(axis=1))
+income_df = (data_frame[["salary","deferral_payments","bonus", "expenses", "loan_advances", "other", "director_fees", "deferred_income", "long_term_incentive"]].sum(axis=1))
 income_diff = data_frame["total_payments"] - income_df
 print income_diff[income_diff>0]
 
@@ -437,9 +444,7 @@ plt.tight_layout()
 
 {% highlight python %}
 # Then visualize the distribution of each column that is about a person's finance .
-plot_finance_data = (data_frame[["salary","deferral_payments","total_payments","exercised_stock_options","bonus",
-                              "restricted_stock", "restricted_stock_deferred", "total_stock_value", "expenses", 
-                               "loan_advances", "other", "director_fees", "deferred_income", "long_term_incentive"]])
+plot_finance_data = (data_frame[["salary","deferral_payments","total_payments","exercised_stock_options","bonus","restricted_stock", "restricted_stock_deferred", "total_stock_value", "expenses", "loan_advances", "other", "director_fees", "deferred_income", "long_term_incentive"]])
 
 sns.set(); sns.set_context("talk") # Set default aesthetics; change context to talk.
 fig = plt.figure(figsize=(10,20), dpi=90)
@@ -447,8 +452,7 @@ fig = plt.figure(figsize=(10,20), dpi=90)
 for plot_idx in xrange(len(plot_finance_data)):
     try:
         ax = plt.subplot(5, 3, plot_idx+1)
-        sns.boxplot(plot_finance_data[plot_finance_data.columns[plot_idx]], ax=ax, orient="v", width=0.4, 
-                    color="#41f483")
+        sns.boxplot(plot_finance_data[plot_finance_data.columns[plot_idx]], ax=ax, orient="v", width=0.4, color="#41f483")
         ax.set_xlabel(plot_finance_data.columns[plot_idx]); ax.set_ylabel("")
     except IndexError:
         continue
@@ -564,8 +568,7 @@ mask[np.triu_indices_from(mask)] = True
 sns.set(style="white"); sns.set_context("notebook")
 f, ax = plt.subplots(figsize=(7, 6), dpi=120)
 cmap = sns.diverging_palette(220, 10, as_cmap=True) # Create color map.
-ax = sns.heatmap(corr_matrix, mask=mask, cmap=cmap, vmax=.5, center=0, square=True, linewidths=.5, vmin=-1, 
-                 cbar_kws={"shrink": .5})
+ax = sns.heatmap(corr_matrix, mask=mask, cmap=cmap, vmax=.5, center=0, square=True, linewidths=.5, vmin=-1, cbar_kws={"shrink": .5})
 f.add_axes(ax)
 {% endhighlight %}
 
@@ -582,8 +585,7 @@ Next, let's use intuition and insight from the heatmap to plot some scatter plot
 {% highlight python %}
 sns.set(); sns.set_context("notebook")
 plt.rcParams['figure.dpi'] = 90
-sns.pairplot(data_frame, hue="poi", vars=["salary", "bonus", "exercised_stock_options", "long_term_incentive"], 
-             palette="husl")
+sns.pairplot(data_frame, hue="poi", vars=["salary", "bonus", "exercised_stock_options", "long_term_incentive"], palette="husl")
 {% endhighlight %}
 
 ![png]({{ "/images/output_24_1.png" | absolute_url }})
