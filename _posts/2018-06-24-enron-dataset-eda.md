@@ -338,7 +338,7 @@ data_frame.isna().apply(sum)
 After filling missing values, we should check if columns of financial data add up to total payments or total stock values.
 
 {% highlight python %}
-income_df = (data_frame[["salary","deferral_payments","bonus", "expenses", "loan_advances", "other", "director_fees", "deferred_income", "long_term_incentive"]].sum(axis=1))
+income_df = (data_frame[["salary","deferral_payments","bonus", "expenses", "loan_advances", "other", "director_fees", "deferred_income","long_term_incentive"]].sum(axis=1))
 income_diff = data_frame["total_payments"] - income_df
 print income_diff[income_diff>0]
 
