@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "LeetCode SQL Coding Problems"
-date: "2018-06-24"
+date: "2018-07-16"
 slug: "leetcode-sql-coding-problems"
 description: "The Enron financial and email data provides a great reservoir for data analysis. This blog is the first piece of the following posts to explore the Enron dataset. Exploratory data analysis is carried out and paves the way for future feature engineering and modeling."
 category: 
