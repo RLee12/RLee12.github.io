@@ -21,7 +21,8 @@ show_meta: false
 
 The `Trips` table holds all taxi trips. Each trip has a unique Id, while Client_Id and Driver_Id are both foreign keys to the Users_Id at the `Users` table. Status is an ENUM type of (‘completed’, ‘cancelled_by_driver’, ‘cancelled_by_client’).
 
-<div style="font-size: 75%; overflow-x: scroll;" markdown="block">
+<div style="font-size: 65%; overflow-x: scroll;" markdown="block">
+
 {% highlight html %}
 +----+-----------+-----------+---------+--------------------+----------+
 | Id | Client_Id | Driver_Id | City_Id |        Status      |Request_at|
@@ -38,6 +39,7 @@ The `Trips` table holds all taxi trips. Each trip has a unique Id, while Client_
 | 10 |     4     |    13     |    12   | cancelled_by_driver|2013-10-03|
 +----+-----------+-----------+---------+--------------------+----------+
 {% endhighlight %}
+
 </div>
 
 The `Users` table holds all users. Each user has an unique Users_Id, and Role is an ENUM type of (‘client’, ‘driver’, ‘partner’).
@@ -71,6 +73,8 @@ Write a SQL query to find the cancellation rate of requests made by unbanned use
 
 MS SQL solution: 
 
+<div style="font-size: 65%; overflow-x: scroll;" markdown="block">
+
 {% highlight sql %}
 SELECT 
 	Request_at AS Day, 
@@ -88,3 +92,5 @@ AND CAST(Request_at AS DATE) BETWEEN '2013-10-01' AND '2013-10-03'
 GROUP BY Request_at
 ORDER BY Day
 {% endhighlight %}
+
+</div>
