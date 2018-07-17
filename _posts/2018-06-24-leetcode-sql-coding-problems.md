@@ -17,6 +17,62 @@ hide_printmsg: true
 show_meta: false
 ---
 
+## LeetCode SQL Problem #185
+
+The `Employee` table holds all employees. Every employee has an Id, and there is also a column for the department Id.
+
+{% highlight html %}
++----+-------+--------+--------------+
+| Id | Name  | Salary | DepartmentId |
++----+-------+--------+--------------+
+| 1  | Joe   | 70000  | 1            |
+| 2  | Henry | 80000  | 2            |
+| 3  | Sam   | 60000  | 2            |
+| 4  | Max   | 90000  | 1            |
+| 5  | Janet | 69000  | 1            |
+| 6  | Randy | 85000  | 1            |
++----+-------+--------+--------------+
+{% endhighlight %}
+
+The `Department` table holds all departments of the company.
+
+{% highlight html %}
++----+----------+
+| Id | Name     |
++----+----------+
+| 1  | IT       |
+| 2  | Sales    |
++----+----------+
+{% endhighlight %}
+
+Write a SQL query to find employees who earn the top three salaries in each of the department. For the above tables, your SQL query should return the following rows.
+
+{% highlight html %}
++------------+----------+--------+
+| Department | Employee | Salary |
++------------+----------+--------+
+| IT         | Max      | 90000  |
+| IT         | Randy    | 85000  |
+| IT         | Joe      | 70000  |
+| Sales      | Henry    | 80000  |
+| Sales      | Sam      | 60000  |
++------------+----------+--------+
+{% endhighlight %}
+
+{% highlight sql %}
+SELECT Name AS Department, Employee, Salary 
+FROM 
+(
+	SELECT 
+		DepartmentId, Name AS Employee, Salary, 
+		DENSE_RANK() OVER (PARTITION BY DepartmentId ORDER BY Salary DESC) AS SalaryRank
+	FROM Employee
+) AS e
+JOIN Department d ON e.DepartmentId = d.Id
+WHERE SalaryRank <= 3
+ORDER BY Department, Salary DESC
+{% endhighlight %}
+
 ## LeetCode SQL Problem #262
 
 The `Trips` table holds all taxi trips. Each trip has a unique Id, while Client_Id and Driver_Id are both foreign keys to the Users_Id at the `Users` table. Status is an ENUM type of (‘completed’, ‘cancelled_by_driver’, ‘cancelled_by_client’).
