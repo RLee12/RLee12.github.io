@@ -410,8 +410,7 @@ The goal here is to visually examine each feature. I want to know the impact of 
 
 {% highlight python %}
 # First visualize the distribution of each column that is about a person's emails.
-plot_email_data = (data_frame[["to_messages","shared_receipt_with_poi","from_messages","from_this_person_to_poi",
-                               "from_poi_to_this_person"]])
+plot_email_data = (data_frame[["to_messages","shared_receipt_with_poi","from_messages","from_this_person_to_poi","from_poi_to_this_person"]])
 
 sns.set(); sns.set_context("talk") # Set default aesthetics; change context to talk.
 fig = plt.figure(figsize=(10,8), dpi=90)
