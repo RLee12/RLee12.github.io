@@ -182,7 +182,8 @@ pre {
   word-break: break-all;
   word-wrap: break-word;
   background-color: #f9f9f9;
-  page-break-inside: avoid
+  page-break-inside: avoid;
+  overflow-x: scroll
 }
 
 pre code {
@@ -200,7 +201,6 @@ pre code {
   -webkit-box-shadow: 3px 3px rgba(0, 0, 0, .1);
   box-shadow: 3px 3px rgba(0, 0, 0, .1);
   margin: 20px 0;
-  overflow: auto;
   overflow-x: scroll
 }
 
