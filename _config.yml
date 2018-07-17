@@ -20,6 +20,7 @@ urlimg: https://rlee12.github.io/images/
 markdown: kramdown
 kramdown:
   math_engine: mathjax
+  input: GFM
 
 paginate: 5
 paginate_path: "/blog/page:num"
