@@ -72,8 +72,11 @@ Write a SQL query to find the cancellation rate of requests made by unbanned use
 MS SQL solution: 
 
 {% highlight sql %}
-SELECT Request_at AS Day, ROUND(SUM(CancelCount)/SUM(TotalCount), 2) AS [Cancellation Rate]
-FROM (
+SELECT 
+	Request_at AS Day, 
+	ROUND(SUM(CancelCount)/SUM(TotalCount), 2) AS [Cancellation Rate]
+FROM 
+(
 	SELECT Client_Id, Request_at,
 		CASE WHEN Status IN ('cancelled_by_driver', 'cancelled_by_client') THEN 1.0 ELSE 0.0 END AS CancelCount,
 		CASE WHEN Status = Status THEN 1.0 ELSE 0.0 END AS TotalCount
